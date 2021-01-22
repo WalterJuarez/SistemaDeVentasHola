@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-/**
- *
- * @author pc
- */
+import Modelo.Cliente;
+import Modelo.ClienteDAO;
+import javax.swing.JOptionPane;
+
 public class VentasForm extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VentasForm
-     */
+    ClienteDAO cdao = new ClienteDAO();
+    
     public VentasForm() {
         initComponents();
     }
@@ -120,6 +115,11 @@ public class VentasForm extends javax.swing.JInternalFrame {
         });
 
         btnBuscarCliente.setText("BUSCAR");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("CLIENTE");
 
@@ -338,6 +338,30 @@ public class VentasForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        buscarCliente();
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    void buscarCliente(){
+        int r;
+        String cod = txtCodCliente.getText();
+        if(txtCodCliente.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "La pestaña no puede estar en blanco");
+        }else{
+            Cliente cliente = cdao.ListarID(cod);
+            if(cliente.getDni() != null){
+                txtNombreCliente.setText(cliente.getNombres());
+                txtCodProducto.requestFocus();
+            }else{
+                r = JOptionPane.showConfirmDialog(this,"Cliente NO registrado, desea registrarlo?");
+                if(r == 0){
+                    ClienteForm cf = new ClienteForm();
+                    Principal.VentanaPrincipal.add(cf);
+                    cf.setVisible(true);
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProducto;
