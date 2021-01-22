@@ -11,6 +11,26 @@ public class ProductoDAO implements CRUD{
     Conexion cn = new Conexion();
     PreparedStatement ps;
     ResultSet rs;
+    
+    public Producto ListarID(int id){
+        String sql = "select * from producto where IdProducto = ?";
+        Producto p = new Producto();
+        try{
+            con = cn.Conectar();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                p.setId(rs.getInt(1));
+                p.setNombres(rs.getString(2));
+                p.setPrecio(rs.getDouble(3));
+                p.setStock(rs.getInt(4));
+                p.setEstado(rs.getString(5));                
+            }
+        }catch(Exception e){            
+        }
+        return p;
+    }
 
     @Override
     public List listar() {

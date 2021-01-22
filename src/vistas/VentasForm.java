@@ -2,13 +2,17 @@
 package vistas;
 
 import Modelo.Cliente;
+import Modelo.Producto;
 import Modelo.ClienteDAO;
+import Modelo.ProductoDAO;
+import Modelo.VentasDAO;
 import javax.swing.JOptionPane;
 
 public class VentasForm extends javax.swing.JInternalFrame {
 
+    VentasDAO vdao = new VentasDAO();
     ClienteDAO cdao = new ClienteDAO();
-    
+    ProductoDAO pdao = new ProductoDAO();
     public VentasForm() {
         initComponents();
     }
@@ -35,7 +39,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtNombreCliente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCodProducto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarProducto = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtProducto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -127,7 +131,12 @@ public class VentasForm extends javax.swing.JInternalFrame {
 
         jLabel6.setText("COD PRODUCTO");
 
-        jButton1.setText("BUSCAR");
+        btnBuscarProducto.setText("BUSCAR");
+        btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProductoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("PRODUCTO");
 
@@ -169,7 +178,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBuscarCliente)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscarProducto)
                     .addComponent(btnAgregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFecha))
                 .addGap(44, 44, 44)
@@ -200,7 +209,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscarProducto)
                     .addComponent(jLabel7)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -342,6 +351,31 @@ public class VentasForm extends javax.swing.JInternalFrame {
         buscarCliente();
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
+    private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
+        buscarProducto();
+    }//GEN-LAST:event_btnBuscarProductoActionPerformed
+    void buscarProducto(){
+        int r;
+        int id = Integer.parseInt(txtCodProducto.getText());
+        if (txtCodProducto.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "La pestaña no puede estar en blanco");
+        }else{
+            Producto p = pdao.ListarID(id);
+            if(p.getId()!= 0){
+                txtProducto.setText(p.getNombres());
+                txtPrecio.setText(""+p.getPrecio());
+                txtStock.setText(""+p.getStock());
+            }else{
+                r = JOptionPane.showConfirmDialog(this, "Producto NO registrado, desea registrarlo?");
+                txtCodProducto.requestFocus();
+                if(r == 0){
+                    ProductosForm cf = new ProductosForm();
+                    Principal.VentanaPrincipal.add(cf);
+                    cf.setVisible(true);
+                }
+            }
+        }
+    }
     void buscarCliente(){
         int r;
         String cod = txtCodCliente.getText();
@@ -366,9 +400,9 @@ public class VentasForm extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerarVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
