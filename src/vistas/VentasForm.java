@@ -6,13 +6,23 @@ import Modelo.Producto;
 import Modelo.ClienteDAO;
 import Modelo.ProductoDAO;
 import Modelo.VentasDAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class VentasForm extends javax.swing.JInternalFrame {
 
     VentasDAO vdao = new VentasDAO();
     ClienteDAO cdao = new ClienteDAO();
     ProductoDAO pdao = new ProductoDAO();
+    Producto p = new Producto();
+    int idp;
+    double tpagar;
+    int cant;
+    double precio;
+    
+    DefaultTableModel modelo = new DefaultTableModel();
+    
     public VentasForm() {
         initComponents();
     }
@@ -149,6 +159,11 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtStock.setEditable(false);
 
         btnAgregarProducto.setText("AGREGAR");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("CANTIDAD");
 
@@ -340,9 +355,15 @@ public class VentasForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCodClienteActionPerformed
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
-        // TODO add your handling code here:
+        guardarVenta();
+        guardarDetalle();
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
-
+    void guardarVenta(){
+        
+    }
+    void guardarDetalle(){
+        
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -354,13 +375,62 @@ public class VentasForm extends javax.swing.JInternalFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         buscarProducto();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        agregarProducto();
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+    void agregarProducto(){
+        double total;
+        int item = 0;
+        modelo = (DefaultTableModel)tblDetalle.getModel();
+        item = item + 1;
+        idp = p.getId();
+        String nomp = txtProducto.getText();
+        precio = Double.parseDouble(txtPrecio.getText());
+        cant = Integer.parseInt(spiCantidad.getValue().toString());
+        int stock = Integer.parseInt(txtStock.getText());
+        total = cant * precio;
+        ArrayList lista = new ArrayList();
+        if (stock > 0){
+            lista.add(item);
+            lista.add(idp);
+            lista.add(nomp);
+            lista.add(cant);
+            lista.add(precio);
+            lista.add(total);
+            Object[] ob = new Object[6];
+            ob[0] = lista.get(0);
+            ob[1] = lista.get(1);
+            ob[2] = lista.get(2);
+            ob[3] = lista.get(3);
+            ob[4] = lista.get(4);
+            ob[5] = lista.get(5);
+            modelo.addRow(ob);
+            tblDetalle.setModel(modelo);
+            calcularTotal();
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Stock Producto no disponible");
+        }
+        
+    }
+    void calcularTotal(){
+        tpagar = 0;
+        for (int i = 0; i < tblDetalle.getRowCount(); i++){
+            cant = Integer.parseInt(tblDetalle.getValueAt(i, 3).toString());
+            precio = Double.parseDouble(tblDetalle.getValueAt(i, 4).toString());
+            tpagar = tpagar + (cant*precio);
+        }
+        txtTotalAPagar.setText(""+tpagar);
+    }
+    
     void buscarProducto(){
         int r;
         int id = Integer.parseInt(txtCodProducto.getText());
         if (txtCodProducto.getText().equals("")){
             JOptionPane.showMessageDialog(this, "La pestaña no puede estar en blanco");
         }else{
-            Producto p = pdao.ListarID(id);
+            p = pdao.ListarID(id);
             if(p.getId()!= 0){
                 txtProducto.setText(p.getNombres());
                 txtPrecio.setText(""+p.getPrecio());
