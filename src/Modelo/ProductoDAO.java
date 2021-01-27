@@ -7,10 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoDAO implements CRUD{
+    int r;
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
     ResultSet rs;
+    
+    public int actualizarStock(int cant, int idp){
+        
+        String sql = "update producto set Stock = ? where IdProducto = ?";
+        try{
+            con = cn.Conectar();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cant);
+            ps.setInt(2, idp);
+            rs = ps.executeQuery();
+        }catch(Exception e){          
+        }
+        return r;
+    }
     
     public Producto ListarID(int id){
         String sql = "select * from producto where IdProducto = ?";

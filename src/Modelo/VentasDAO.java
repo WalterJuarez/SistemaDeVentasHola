@@ -27,6 +27,21 @@ public class VentasDAO {
         return idv;
     }
     
+    public String NroSerieVentas(){
+        String serie = "";
+        String sql = "select max(NumeroSerie) from ventas";
+        try{
+            con = cn.Conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                serie = rs.getString(1);
+            }
+        }catch(Exception e){            
+        }
+        return serie;
+    }
+    
     public int GuardarVentas(Ventas v){
         Ventas ventas = new Ventas();
         String sql = "insert into ventas(IdCliente,IdVendedor,NumeroSerie,FechaVenta,Monto,Estado)values(?,?,?,?,?,?)";
