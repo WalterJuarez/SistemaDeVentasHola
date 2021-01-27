@@ -80,6 +80,7 @@ public final class VendedorForm extends javax.swing.JInternalFrame {
 
         jButton3.setText("jButton3");
 
+        setClosable(true);
         setTitle("Vendedor");
 
         jLabel1.setText("DNI:");

@@ -21,7 +21,7 @@ public class ProductoDAO implements CRUD{
             ps = con.prepareStatement(sql);
             ps.setInt(1, cant);
             ps.setInt(2, idp);
-            rs = ps.executeQuery();
+            ps.executeUpdate();
         }catch(Exception e){          
         }
         return r;

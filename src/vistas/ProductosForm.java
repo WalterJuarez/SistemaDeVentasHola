@@ -61,6 +61,7 @@ public class ProductosForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablapr = new javax.swing.JTable();
 
+        setClosable(true);
         setTitle("Productos");
 
         jLabel1.setText("NOMBRE:");

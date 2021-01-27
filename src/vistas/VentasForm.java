@@ -6,6 +6,7 @@ import Modelo.Producto;
 import Modelo.ClienteDAO;
 import Modelo.DetalleVentas;
 import Modelo.ProductoDAO;
+import Modelo.Vendedor;
 import Modelo.Ventas;
 import Modelo.VentasDAO;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class VentasForm extends javax.swing.JInternalFrame {
 
     VentasDAO vdao = new VentasDAO();
+    Vendedor vend= new Vendedor();
     ClienteDAO cdao = new ClienteDAO();
     ProductoDAO pdao = new ProductoDAO();
     Ventas v = new Ventas();
@@ -34,10 +36,11 @@ public class VentasForm extends javax.swing.JInternalFrame {
         initComponents();
         generarSerie();
         fecha();
+        txtVendedor.setText("Vendedor 1");
     }
     void fecha(){
         Calendar calendar = new GregorianCalendar();
-        txtFecha.setText(""+calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+        txtFecha.setText(""+calendar.get(Calendar.DAY_OF_MONTH)+" - "+(calendar.get(Calendar.MONTH)+1)+" - "+calendar.get(Calendar.YEAR));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +56,8 @@ public class VentasForm extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtSerie = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCodCliente = new javax.swing.JTextField();
@@ -71,7 +76,6 @@ public class VentasForm extends javax.swing.JInternalFrame {
         btnAgregarProducto = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         spiCantidad = new javax.swing.JSpinner();
-        txtFecha = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtVendedor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -83,6 +87,8 @@ public class VentasForm extends javax.swing.JInternalFrame {
         btnGenerarVenta = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("Generar Ventas");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -97,6 +103,10 @@ public class VentasForm extends javax.swing.JInternalFrame {
 
         txtSerie.setEditable(false);
 
+        txtFecha.setEditable(false);
+
+        jLabel13.setText("FECHA");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,17 +114,24 @@ public class VentasForm extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(324, 324, 324)
-                        .addComponent(jLabel2)))
-                .addGap(269, 269, 269))
+                        .addComponent(jLabel2)
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(255, 255, 255)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(264, 264, 264)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +139,10 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -132,7 +152,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel4.setText("COD CLIENTE");
+        jLabel4.setText("NIT");
 
         txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,8 +199,6 @@ public class VentasForm extends javax.swing.JInternalFrame {
 
         jLabel10.setText("CANTIDAD");
 
-        txtFecha.setEditable(false);
-
         jLabel11.setText("VENDEDOR");
 
         txtVendedor.setEditable(false);
@@ -203,11 +221,10 @@ public class VentasForm extends javax.swing.JInternalFrame {
                     .addComponent(txtPrecio)
                     .addComponent(spiCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBuscarCliente)
                     .addComponent(btnBuscarProducto)
-                    .addComponent(btnAgregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFecha))
+                    .addComponent(btnAgregarProducto))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -250,7 +267,6 @@ public class VentasForm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(spiCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(txtVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -391,6 +407,10 @@ public class VentasForm extends javax.swing.JInternalFrame {
         txtCodCliente.setText("");
         txtNombreCliente.setText("");       
         txtTotalAPagar.setText("");
+        txtCodProducto.setText("");
+        txtProducto.setText("");
+        txtPrecio.setText("");
+        txtStock.setText("");
         spiCantidad.setValue(0);
         txtCodCliente.requestFocus();
                 
@@ -407,8 +427,8 @@ public class VentasForm extends javax.swing.JInternalFrame {
             idp = Integer.parseInt(tblDetalle.getValueAt(i, 1).toString());
             cant = Integer.parseInt(tblDetalle.getValueAt(i, 3).toString());
             pr = pdao.ListarID(idp);
-            int sa = pr.getStock()-cant;
-            pdao.actualizarStock(sa, idp);
+            int sal = pr.getStock()-cant;
+            pdao.actualizarStock(sal, idp);
         }
     }
     void guardarVenta(){
@@ -453,7 +473,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
         }
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        nuevo();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
@@ -566,6 +586,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

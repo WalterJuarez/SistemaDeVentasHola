@@ -64,6 +64,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
 
+        setClosable(true);
         setTitle("Cliente");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
