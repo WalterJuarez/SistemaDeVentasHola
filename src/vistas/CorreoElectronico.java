@@ -66,7 +66,8 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtMontoNin = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnVerificar = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -107,7 +108,14 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
 
         jLabel12.setText("MONTO");
 
-        jButton1.setText("VERIFICAR");
+        btnVerificar.setText("VERIFICAR");
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("COMENTARIOS:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,19 +135,19 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jButton1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel11)
-                                                .addGap(12, 12, 12))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(jLabel3)
                                                     .addComponent(jLabel4)
                                                     .addComponent(jLabel5)
                                                     .addComponent(jLabel10))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnVerificar)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel11)
+                                                .addGap(12, 12, 12)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtTotalPares)
                                             .addComponent(spiCab, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -162,7 +170,8 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
                                             .addComponent(txtMontoCab, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(26, 26, 26)
-                                        .addComponent(jLabel6))))))
+                                        .addComponent(jLabel6))))
+                            .addComponent(jLabel13)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
                         .addComponent(btnEnviar)))
@@ -201,12 +210,14 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnVerificar)
                     .addComponent(jLabel11)
                     .addComponent(txtTotalPares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(txtTotalMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEnviar)
@@ -229,7 +240,8 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
         String password = "hola123-zona1";
         String destino = "waldon11081986@gmail.com";
         String asunto = txtAsunto.getText();
-        String comentario = txtComentarios.getText();
+        String comentario = "Reporte de ventas del dia:\n"+"Caballero\t"+spiCab.getValue().toString()+"\n"+
+                            "Dama\t"+spiDam.getValue().toString()+txtComentarios.getText();
         
         MimeMessage mail = new MimeMessage(sesion);
         try{
@@ -247,14 +259,29 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
         }catch(MessagingException e){}
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        int cantCab = Integer.parseInt(spiCab.getValue().toString());
+        int cantDam = Integer.parseInt(spiDam.getValue().toString());
+        int cantNin = Integer.parseInt(spiNin.getValue().toString());
+        int cantTotal = cantCab + cantDam + cantNin;
+        txtTotalPares.setText(""+ cantTotal);
+        
+        double montoCab = Double.parseDouble(txtMontoCab.getText());
+        double montoDam = Double.parseDouble(txtMontoDam.getText());
+        double montoNin = Double.parseDouble(txtMontoNin.getText());
+        double montoTotal = montoCab + montoDam + montoNin;
+        txtTotalMonto.setText(""+ montoTotal);
+    }//GEN-LAST:event_btnVerificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
