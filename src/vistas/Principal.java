@@ -43,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +141,14 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem7.setText("Reporte");
         jMenu4.add(jMenuItem7);
 
+        jMenuItem8.setText("Envio de Correo");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -189,6 +198,11 @@ public class Principal extends javax.swing.JFrame {
         VendedorForm vef = new VendedorForm();
         CentrarVentana(vef);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        CorreoElectronico cef = new CorreoElectronico();
+        CentrarVentana(cef);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 void CentrarVentana(JInternalFrame frame){
     VentanaPrincipal.add(frame);
     Dimension dimension = VentanaPrincipal.getSize();
@@ -216,5 +230,6 @@ void CentrarVentana(JInternalFrame frame){
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
