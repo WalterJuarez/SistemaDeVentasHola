@@ -22,6 +22,10 @@ import javax.swing.JOptionPane;
  */
 public class CorreoElectronico extends javax.swing.JInternalFrame {
 
+    double montoCab;
+    double montoDam;
+    double montoNin;
+    double montoTotal;
     /**
      * Creates new form CorreoElectronico
      */
@@ -240,8 +244,10 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
         String password = "hola123-zona1";
         String destino = "waldon11081986@gmail.com";
         String asunto = txtAsunto.getText();
-        String comentario = "Reporte de ventas del dia:\n"+"Caballero\t"+spiCab.getValue().toString()+"\n"+
-                            "Dama\t"+spiDam.getValue().toString()+txtComentarios.getText();
+        String comentario = "Reporte de ventas del dia:\n"+
+                            "Caballero\t"+spiCab.getValue().toString()+"\tMonto\tQ. "+txtMontoCab.getText()+"\n"+
+                            "Dama \t\t"+spiDam.getValue().toString()+"\tMonto\tQ. "+"\n"+
+                            "Niño  \t\t"+spiNin.getValue().toString()+"\n"+txtComentarios.getText();
         
         MimeMessage mail = new MimeMessage(sesion);
         try{
@@ -260,19 +266,21 @@ public class CorreoElectronico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        verificarDatos();
+    }//GEN-LAST:event_btnVerificarActionPerformed
+    void verificarDatos(){
         int cantCab = Integer.parseInt(spiCab.getValue().toString());
         int cantDam = Integer.parseInt(spiDam.getValue().toString());
         int cantNin = Integer.parseInt(spiNin.getValue().toString());
         int cantTotal = cantCab + cantDam + cantNin;
         txtTotalPares.setText(""+ cantTotal);
         
-        double montoCab = Double.parseDouble(txtMontoCab.getText());
-        double montoDam = Double.parseDouble(txtMontoDam.getText());
-        double montoNin = Double.parseDouble(txtMontoNin.getText());
-        double montoTotal = montoCab + montoDam + montoNin;
+        montoCab = Double.parseDouble(txtMontoCab.getText());
+        montoDam = Double.parseDouble(txtMontoDam.getText());
+        montoNin = Double.parseDouble(txtMontoNin.getText());
+        montoTotal = montoCab + montoDam + montoNin;
         txtTotalMonto.setText(""+ montoTotal);
-    }//GEN-LAST:event_btnVerificarActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
