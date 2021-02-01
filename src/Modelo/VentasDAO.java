@@ -4,6 +4,7 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class VentasDAO {
     Conexion cn = new Conexion();
@@ -22,7 +23,7 @@ public class VentasDAO {
             while (rs.next()){
                 idv = rs.getString(1);
             }
-        }catch(Exception e){            
+        }catch(SQLException e){            
         }
         return idv;
     }
@@ -49,12 +50,12 @@ public class VentasDAO {
             con = cn.Conectar();
             ps = con.prepareStatement(sql);
             ps.setInt(1, v.getIdCliente());
-            ps.setInt(2, v.idVendedor);
+            ps.setInt(2, v.getIdVendedor());
             ps.setString(3, v.getSerie());
             ps.setString(4, v.getFecha());
             ps.setDouble(5, v.getMonto());
             ps.setString(6, v.getEstado());
-            r = ps.executeUpdate();
+            ps.executeUpdate();
         }catch(Exception e){            
         }
         return r;
@@ -69,7 +70,7 @@ public class VentasDAO {
             ps.setInt(2, dv.getIdProducto());
             ps.setInt(3, dv.getCantidad());
             ps.setDouble(4, dv.getPreVenta());            
-            r = ps.executeUpdate();
+            ps.executeUpdate();
             
         }catch(Exception e){            
         }

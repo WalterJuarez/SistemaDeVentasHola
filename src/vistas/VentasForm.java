@@ -448,10 +448,12 @@ public class VentasForm extends javax.swing.JInternalFrame {
     }
     void guardarDetalle(){
         String idv = vdao.IdVentas();
+        
         int idve = Integer.parseInt(idv);
+        
         for(int i = 0; i < tblDetalle.getRowCount(); i++){
-            int idp = Integer.parseInt(tblDetalle.getValueAt(i, 1).toString());
-            int cant = Integer.parseInt(tblDetalle.getValueAt(i, 3).toString());
+            idp = Integer.parseInt(tblDetalle.getValueAt(i, 1).toString());
+            cant = Integer.parseInt(tblDetalle.getValueAt(i, 3).toString());
             double pre = Double.parseDouble(tblDetalle.getValueAt(i, 4).toString());
             dv.setIdVentas(idve);
             dv.setIdProducto(idp);
