@@ -393,7 +393,7 @@ public final class VentasForm extends javax.swing.JInternalFrame {
             actualizarStock();
             JOptionPane.showMessageDialog(this, "Guardado exitosamente");            
             nuevo();
-            //generarSerie();
+            generarSerie();
         }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
     void nuevoP(){
