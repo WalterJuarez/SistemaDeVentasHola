@@ -181,10 +181,10 @@
                       <Component id="spiCantidad" alignment="0" pref="123" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnBuscarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnBuscarProducto" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnAgregarProducto" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnAgregarProducto" max="32767" attributes="0"/>
+                      <Component id="btnBuscarProducto" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnBuscarCliente" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -200,7 +200,7 @@
                       <Component id="txtNombreCliente" max="32767" attributes="0"/>
                       <Component id="txtVendedor" pref="121" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="160" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

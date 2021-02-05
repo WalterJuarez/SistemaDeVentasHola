@@ -11,37 +11,39 @@ import Modelo.Ventas;
 import Modelo.VentasDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class VentasForm extends javax.swing.JInternalFrame {
+public final class VentasForm extends javax.swing.JInternalFrame {
 
-    VentasDAO vdao = new VentasDAO();
-    Vendedor vend= new Vendedor();
+    VentasDAO vdao = new VentasDAO();   
     ClienteDAO cdao = new ClienteDAO();
     ProductoDAO pdao = new ProductoDAO();
-    Ventas v = new Ventas();
+    Vendedor vend= new Vendedor();
     Producto p = new Producto();
+    Ventas v = new Ventas();
     DetalleVentas dv = new DetalleVentas();
     Cliente cliente = new Cliente();
-    int idp;
-    double tpagar;
-    int cant;
-    double precio;
     
     DefaultTableModel modelo = new DefaultTableModel();
+    
+      
+    
+    int idp;
+    int cant;
+    double precio;
+    double tpagar;  
     
     public VentasForm() {
         initComponents();
         generarSerie();
-        fecha();
+        Calendar calendar = new GregorianCalendar();
+        txtFecha.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
         txtVendedor.setText("Vendedor 1");
     }
-    void fecha(){
-        Calendar calendar = new GregorianCalendar();
-        txtFecha.setText(""+calendar.get(Calendar.DAY_OF_MONTH)+" - "+(calendar.get(Calendar.MONTH)+1)+" - "+calendar.get(Calendar.YEAR));
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -221,10 +223,10 @@ public class VentasForm extends javax.swing.JInternalFrame {
                     .addComponent(txtPrecio)
                     .addComponent(spiCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscarCliente)
-                    .addComponent(btnBuscarProducto)
-                    .addComponent(btnAgregarProducto))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAgregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -237,7 +239,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
                     .addComponent(txtStock)
                     .addComponent(txtNombreCliente)
                     .addComponent(txtVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +393,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
             actualizarStock();
             JOptionPane.showMessageDialog(this, "Guardado exitosamente");            
             nuevo();
-            generarSerie();
+            //generarSerie();
         }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
     void nuevoP(){
@@ -432,7 +434,7 @@ public class VentasForm extends javax.swing.JInternalFrame {
         }
     }
     void guardarVenta(){
-        int idv = 6;
+        int idv = 1;
         int idc = cliente.getId();
         String serie = txtSerie.getText();
         String fecha = txtFecha.getText();
