@@ -45,7 +45,7 @@ public class VentasDAO {
     
     public int GuardarVentas(Ventas v){
         Ventas venta = new Ventas();       
-        String sql = "insert into ventas(IdCliente,IdVendedor,NumeroSerie,FechaVenta,Monto,Estado)values(?,?,?,?,?,?)";
+        String sql = "insert into ventas(IdCliente,IdVendedor,NumeroSerie,FechaVenta,Monto,Estado,Tpago)values(?,?,?,?,?,?,?)";
         try{
             con = cn.Conectar();
             ps = con.prepareStatement(sql);
@@ -55,6 +55,7 @@ public class VentasDAO {
             ps.setString(4, v.getFecha());
             ps.setDouble(5, v.getMonto());
             ps.setString(6, v.getEstado());
+            ps.setString(7, v.getTpago());
             r = ps.executeUpdate();
         }catch(Exception e){            
         }

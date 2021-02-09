@@ -11,7 +11,6 @@ import Modelo.Ventas;
 import Modelo.VentasDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -82,6 +81,8 @@ public final class VentasForm extends javax.swing.JInternalFrame {
         txtVendedor = new javax.swing.JTextField();
         txtSerie = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        cbxPago = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetalle = new javax.swing.JTable();
@@ -196,6 +197,10 @@ public final class VentasForm extends javax.swing.JInternalFrame {
 
         jLabel3.setText("PEDIDO");
 
+        cbxPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR ...", "CARGO EXPRESO", "TAJERTA", "EFECTIVO" }));
+
+        jLabel14.setText("PAGO");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -225,9 +230,11 @@ public final class VentasForm extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel9)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxPago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtProducto)
                     .addComponent(txtStock)
                     .addComponent(txtNombreCliente)
@@ -267,7 +274,9 @@ public final class VentasForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(cbxPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -368,7 +377,7 @@ public final class VentasForm extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -435,12 +444,15 @@ public final class VentasForm extends javax.swing.JInternalFrame {
         String fecha = txtFecha.getText();
         double monto = tpagar;
         String estado = "1";
+        String tpago = cbxPago.getSelectedItem().toString();
+        
         v.setIdCliente(idc);
         v.setIdVendedor(idv);
         v.setSerie(serie);
         v.setFecha(fecha);
         v.setMonto(monto);
         v.setEstado(estado);
+        v.setTpago(tpago);
         vdao.GuardarVentas(v);
     }
     void guardarDetalle(){
@@ -461,7 +473,7 @@ public final class VentasForm extends javax.swing.JInternalFrame {
         
     }
     
-    void generarSerie(){
+    /*void generarSerie(){
         String serie = vdao.NroSerieVentas();
         if (serie == null){
             txtSerie.setText("0000001");
@@ -470,7 +482,7 @@ public final class VentasForm extends javax.swing.JInternalFrame {
             increment = increment + 1;
             txtSerie.setText("000000"+increment);
         }
-    }
+    }*/
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         nuevo();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -581,11 +593,13 @@ public final class VentasForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerarVenta;
+    private javax.swing.JComboBox<String> cbxPago;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
