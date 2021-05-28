@@ -9,12 +9,11 @@ public class Ventas {
     String fecha;
     double monto;
     String estado;
-    String tpago;
 
     public Ventas() {
     }
 
-    public Ventas(int id, int idCliente, int idVendedor, String serie, String fecha, double monto, String estado, String tpago) {
+    public Ventas(int id, int idCliente, int idVendedor, String serie, String fecha, double monto, String estado) {
         this.id = id;
         this.idCliente = idCliente;
         this.idVendedor = idVendedor;
@@ -22,7 +21,6 @@ public class Ventas {
         this.fecha = fecha;
         this.monto = monto;
         this.estado = estado;
-        this.tpago = tpago;
     }
 
     public int getId() {
@@ -79,14 +77,6 @@ public class Ventas {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getTpago() {
-        return tpago;
-    }
-
-    public void setTpago(String tpago) {
-        this.tpago = tpago;
     }
     
     

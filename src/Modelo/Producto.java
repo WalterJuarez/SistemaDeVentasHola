@@ -2,6 +2,7 @@ package Modelo;
 
 public class Producto {
     int id;
+    String codigo;
     String nombres;
     double precio;
     int stock;
@@ -10,8 +11,9 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int id, String nombres, double precio, int stock, String estado) {
+    public Producto(int id, String codigo, String nombres, double precio, int stock, String estado) {
         this.id = id;
+        this.codigo = codigo;
         this.nombres = nombres;
         this.precio = precio;
         this.stock = stock;
@@ -26,6 +28,15 @@ public class Producto {
         this.id = id;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    
     public String getNombres() {
         return nombres;
     }

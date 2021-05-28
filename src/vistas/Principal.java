@@ -37,7 +37,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -96,21 +95,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Generar Venta");
+        jMenuItem3.setText("GenerarVenta");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
-
-        jMenuItem9.setText("Asignar Recibo");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
 
@@ -212,11 +203,6 @@ public class Principal extends javax.swing.JFrame {
         CorreoElectronico cef = new CorreoElectronico();
         CentrarVentana(cef);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        AsignarFacturaForm aff = new AsignarFacturaForm();
-        CentrarVentana(aff);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
 void CentrarVentana(JInternalFrame frame){
     VentanaPrincipal.add(frame);
     Dimension dimension = VentanaPrincipal.getSize();
@@ -245,6 +231,5 @@ void CentrarVentana(JInternalFrame frame){
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

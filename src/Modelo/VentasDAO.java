@@ -23,7 +23,7 @@ public class VentasDAO {
             while (rs.next()){
                 idv = rs.getString(1);
             }
-        }catch(SQLException e){            
+        }catch(Exception e){            
         }
         return idv;
     }
@@ -44,18 +44,18 @@ public class VentasDAO {
     }
     
     public int GuardarVentas(Ventas v){
-        Ventas venta = new Ventas();       
-        String sql = "insert into ventas(IdCliente,IdVendedor,NumeroSerie,FechaVenta,Monto,Estado,Tpago)values(?,?,?,?,?,?,?)";
+        Ventas ventas = new Ventas();
+        String sql = "insert into ventas(IdCliente,IdVendedor,NumeroSerie,FechaVenta,Monto,Estado)values(?,?,?,?,?,?)";
         try{
             con = cn.Conectar();
             ps = con.prepareStatement(sql);
             ps.setInt(1, v.getIdCliente());
-            ps.setInt(2, v.getIdVendedor());
-            ps.setString(3,v.getSerie());
+            ps.setInt(2, v.idVendedor);
+            ps.setString(3, v.getSerie());
             ps.setString(4, v.getFecha());
             ps.setDouble(5, v.getMonto());
             ps.setString(6, v.getEstado());
-            ps.setString(7, v.getTpago());
+            
             r = ps.executeUpdate();
         }catch(Exception e){            
         }
@@ -63,7 +63,7 @@ public class VentasDAO {
     }
     
     public int GuardarDetalleVentas(DetalleVentas dv){
-        String sql = "insert into detalle_ventas(IdVentas,IdProducto,Cantidad,PrecioVenta)values(?,?,?,?)";
+        String sql = "insert into detalle_ventas(IdVentas, IdProducto, Cantidad, PrecioVenta, Codigo)value(?,?,?,?,?)";
         try{
             con = cn.Conectar();
             ps = con.prepareStatement(sql);
@@ -71,7 +71,8 @@ public class VentasDAO {
             ps.setInt(2, dv.getIdProducto());
             ps.setInt(3, dv.getCantidad());
             ps.setDouble(4, dv.getPreVenta());            
-            ps.executeUpdate();
+            ps.setString(5, dv.getCodigo()); 
+            r = ps.executeUpdate();
             
         }catch(Exception e){            
         }

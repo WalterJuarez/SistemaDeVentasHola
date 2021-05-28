@@ -23,13 +23,14 @@ public class ProductosForm extends javax.swing.JInternalFrame {
     void listar(){
         List<Producto> lista = dao.listar();
         modelo = (DefaultTableModel)tablapr.getModel();
-        Object[] ob = new Object[5];
+        Object[] ob = new Object[6];
         for (int i = 0; i < lista.size(); i++){
-            ob[0] = lista.get(i).getId();
-           ob[1] = lista.get(i).getNombres();
-           ob[2] = lista.get(i).getPrecio();
-           ob[3] = lista.get(i).getStock();
-           ob[4] = lista.get(i).getEstado();
+           ob[0] = lista.get(i).getId();
+           ob[1] = lista.get(i).getCodigo();
+           ob[2] = lista.get(i).getNombres();
+           ob[3] = lista.get(i).getPrecio();
+           ob[4] = lista.get(i).getStock();
+           ob[5] = lista.get(i).getEstado();
            modelo.addRow(ob);
         }
         tablapr.setModel(modelo);
@@ -48,7 +49,6 @@ public class ProductosForm extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
@@ -60,6 +60,9 @@ public class ProductosForm extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablapr = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Productos");
@@ -69,8 +72,6 @@ public class ProductosForm extends javax.swing.JInternalFrame {
         jLabel2.setText("PRECIO:");
 
         jLabel3.setText("STOCK:");
-
-        jLabel4.setText("ESTADO:");
 
         cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "1", "0" }));
 
@@ -107,7 +108,7 @@ public class ProductosForm extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "NOMBRES", "PRECIO", "STOCK", "ESTADO"
+                "ID", "CODIGO", "NOMBRES", "PRECIO", "STOCK", "ESTADO"
             }
         ));
         tablapr.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,9 +131,13 @@ public class ProductosForm extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
+
+        jLabel4.setText("ESTADO:");
+
+        jLabel5.setText("CODIGO:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,17 +148,20 @@ public class ProductosForm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtStock, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(txtnombre)
-                            .addComponent(cboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCodigo))
                         .addGap(88, 88, 88)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,27 +175,33 @@ public class ProductosForm extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btAgregar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAgregar)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btActualizar))
+                    .addComponent(btActualizar)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btEliminar))
+                    .addComponent(btEliminar)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(btNuevo)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btNuevo))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -243,10 +257,12 @@ public class ProductosForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila");
         }else {
             id = Integer.parseInt(tablapr.getValueAt(fila, 0).toString());
-            String nombres = tablapr.getValueAt(fila, 1).toString();
-            String precio = tablapr.getValueAt(fila, 2).toString();
-            String stock = tablapr.getValueAt(fila, 3).toString();
-            String estado = tablapr.getValueAt(fila, 4).toString();
+            String codigo = tablapr.getValueAt(fila, 1).toString();
+            String nombres = tablapr.getValueAt(fila, 2).toString();
+            String precio = tablapr.getValueAt(fila, 3).toString();
+            String stock = tablapr.getValueAt(fila, 4).toString();
+            String estado = tablapr.getValueAt(fila, 5).toString();
+            txtCodigo.setText(codigo);
             txtnombre.setText(nombres);
             txtPrecio.setText(precio);
             txtStock.setText(stock);
@@ -255,15 +271,17 @@ public class ProductosForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaprMouseClicked
 
     void agregar(){
+        String codigo = txtCodigo.getText();
         String nombres = txtnombre.getText();
         String precio = txtPrecio.getText();
         String stock = txtStock.getText();
         String estado = cboEstado.getSelectedItem().toString();
-        Object[]ob = new Object[4];
-        ob[0] = nombres;
-        ob[1] = precio;
-        ob[2] = stock;
-        ob[3] = estado;
+        Object[]ob = new Object[5];
+        ob[0] = codigo;
+        ob[1] = nombres;
+        ob[2] = precio;
+        ob[3] = stock;
+        ob[4] = estado;
         dao.add(ob);
         
     }
@@ -273,16 +291,18 @@ public class ProductosForm extends javax.swing.JInternalFrame {
         if (fila == -1){
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila");
         }else{
+            String codigo = txtCodigo.getText();
             String nombres = txtnombre.getText();
             String precio = txtPrecio.getText();
             String stock = txtStock.getText();
             String estado = cboEstado.getSelectedItem().toString();
-            Object[]ob = new Object[5];        
-            ob[0] = nombres;
-            ob[1] = precio;
-            ob[2] = stock;
-            ob[3] = estado;
-            ob[4] = id;
+            Object[]ob = new Object[6];  
+            ob[0] = codigo;
+            ob[1] = nombres;
+            ob[2] = precio;
+            ob[3] = stock;
+            ob[4] = estado;
+            ob[5] = id;
             dao.actualizar(ob);
         }
     }
@@ -320,10 +340,12 @@ public class ProductosForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablapr;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtnombre;
